@@ -24,10 +24,10 @@ const getPinById = async (categoryId) => {
       return res;
     }
   } catch (error) {
-    const { message } = error;
+    const { type } = error;
     return {
       data: [],
-      error: message,
+      error: type,
     };
   }
 };
@@ -47,10 +47,10 @@ const getPinFeed = async (query = feedQuery) => {
       });
     return res;
   } catch (error) {
-    const { message } = error;
+    const { type } = error;
     return {
       data: [],
-      error: message,
+      error: type,
     };
   }
 };
@@ -86,10 +86,37 @@ const savePin = async (id) => {
       return resValue;
     }
   } catch (error) {
-    const { message } = error;
+    const { type } = error;
     return {
       data: [],
-      error: message,
+      error: type, // error
+    };
+  }
+};
+
+const deletePin = async (id) => {
+  try {
+    const res = await client
+      .delete(id)
+      .then((res) => {
+        return {
+          data: res,
+          error: "",
+        };
+      })
+      .catch((err) => {
+        throw err;
+      });
+    const { data, error } = res;
+    if (res && data.transactionId) {
+      const resValue = await getPinFeed();
+      return resValue;
+    }
+  } catch (error) {
+    const { type } = error;
+    return {
+      data: [],
+      error: type, // error
     };
   }
 };
@@ -98,6 +125,7 @@ const PinService = {
   getPinById,
   getPinFeed,
   savePin,
+  deletePin,
 };
 
 export default PinService;

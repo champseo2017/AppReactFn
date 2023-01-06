@@ -5,8 +5,8 @@ import Home from "./container/Home";
 const App = () => {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
-      <Route path="/*" element={<Home />} />
+      <Route exact path="login" element={<Login />} />
+      <Route exact path="/*" element={<Home />} />
     </Routes>
   );
 };

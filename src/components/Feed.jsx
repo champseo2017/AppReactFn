@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { client } from "client";
 import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
-import { PinSlices } from "../redux/slices";
+import { PinSlices } from "redux/slices";
 import { useDispatch, useSelector } from "react-redux";
 import { searchQuery, feedQuery, subscriptionFeedPinQuery } from "utils/data";
 // Utils
 import { fetchUser } from "utils/fetchUser";
+import { UseFetcher } from "./UseFetcher";
 import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
 import groq from "groq";
 import PinService from "services/pinService";
 
@@ -18,23 +18,6 @@ const Feed = () => {
   const [pins, setPins] = useState(null);
   const { categoryId } = useParams();
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (categoryId) {
-  //     const query = searchQuery(categoryId);
-  //     client.fetch(query).then((data) => {
-  //       setPins(data);
-  //       setLoading(false);
-  //     });
-  //   } else {
-  //     client.fetch(feedQuery).then((data) => {
-  //       setPins(data);
-  //       setLoading(false);
-  //     });
-  //   }
-  //   return () => {};
-  // }, [categoryId]);
 
   const resPinData = useSelector((state) => {
     const { pin } = state;
@@ -56,7 +39,7 @@ const Feed = () => {
     [categoryId]
   );
 
-  const { data } = useSWR(groq`${feedQuery}`, fetcher, {
+  const { data } = UseFetcher(groq`${feedQuery}`, fetcher, {
     revalidateOnFocus: true,
   });
 

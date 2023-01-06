@@ -1,12 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { PinSlices } from './slices';
-
-const reducer = {
-  pin: PinSlices.reducer,
-};
+import rootReducer from './rootReducer';
 
 const store = configureStore({
-  reducer: reducer,
+  reducer: rootReducer,
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

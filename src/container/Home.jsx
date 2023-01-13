@@ -16,9 +16,18 @@ import { useToggle } from "ahooks";
 // Utils
 import { userQuery } from "utils/data";
 import { fetchUser } from "utils/fetchUser";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingOverlay from "react-loading-overlay";
+LoadingOverlay.propTypes = undefined
 
 const Home = () => {
   const [state, { toggle, setLeft, setRight }] = useToggle();
+  const resCreatePin = useSelector((dataState) => {
+    const { createPin } = dataState;
+    if (createPin) {
+      return createPin;
+    }
+  });
 
   const toggleState = state;
 
@@ -45,7 +54,13 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex bg-grey-500 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
+    <LoadingOverlay
+    active={resCreatePin && resCreatePin.loading ? true : false}
+    // spinner={<BounceLoader />}
+    spinner={true}
+    text="Loading your content..."
+  >
+    <div className="flex bg-gray-500 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
       <div className="hidden md:flex h-screen flex-initial">
         <Sidebar user={user && user} />
       </div>
@@ -79,6 +94,7 @@ const Home = () => {
         </Routes>
       </div>
     </div>
+    </LoadingOverlay>
   );
 };
 

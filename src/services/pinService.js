@@ -3,6 +3,7 @@ import { searchQuery, feedQuery, subscriptionFeedPinQuery } from "utils/data";
 // Utils
 import { fetchUser } from "utils/fetchUser";
 import { v4 as uuidv4 } from "uuid";
+import { res200, res400 } from "./response";
 
 const user = fetchUser();
 
@@ -13,10 +14,7 @@ const getPinById = async (categoryId) => {
       const res = await client
         .fetch(query)
         .then((res) => {
-          return {
-            data: res,
-            error: "",
-          };
+          return res200(res);
         })
         .catch((err) => {
           throw err;
@@ -25,10 +23,26 @@ const getPinById = async (categoryId) => {
     }
   } catch (error) {
     const { type } = error;
-    return {
-      data: [],
-      error: type,
-    };
+    return res400(type);
+  }
+};
+
+const createPin = async (docPin = {}) => {
+  try {
+    if (docPin) {
+      const res = await client
+        .create(docPin)
+        .then(() => {
+          return res200("Pin created successfully");
+        })
+        .catch((err) => {
+          throw err;
+        });
+      return res;
+    }
+  } catch (error) {
+    const { type } = error;
+    return res400(type);
   }
 };
 
@@ -37,10 +51,7 @@ const getPinFeed = async (query = feedQuery) => {
     const res = await client
       .fetch(query)
       .then((res) => {
-        return {
-          data: res,
-          error: "",
-        };
+        return res200(res);
       })
       .catch((err) => {
         throw err;
@@ -48,10 +59,7 @@ const getPinFeed = async (query = feedQuery) => {
     return res;
   } catch (error) {
     const { type } = error;
-    return {
-      data: [],
-      error: type,
-    };
+    return res400(type);
   }
 };
 
@@ -72,10 +80,7 @@ const savePin = async (id) => {
       ])
       .commit()
       .then((res) => {
-        return {
-          data: res,
-          error: "",
-        };
+        return res200(res);
       })
       .catch((err) => {
         throw err;
@@ -87,10 +92,7 @@ const savePin = async (id) => {
     }
   } catch (error) {
     const { type } = error;
-    return {
-      data: [],
-      error: type, // error
-    };
+    return res400(type);
   }
 };
 
@@ -99,10 +101,7 @@ const deletePin = async (id) => {
     const res = await client
       .delete(id)
       .then((res) => {
-        return {
-          data: res,
-          error: "",
-        };
+        return res200(res);
       })
       .catch((err) => {
         throw err;
@@ -114,10 +113,7 @@ const deletePin = async (id) => {
     }
   } catch (error) {
     const { type } = error;
-    return {
-      data: [],
-      error: type, // error
-    };
+    return res400(type);
   }
 };
 
@@ -126,6 +122,7 @@ const PinService = {
   getPinFeed,
   savePin,
   deletePin,
+  createPin,
 };
 
 export default PinService;

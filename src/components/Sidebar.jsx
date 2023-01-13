@@ -4,7 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import logo from "../assets/rsz_logo-no-background.png";
 
 const isNotActiveStyle = `flex items-center px-5 gap-3 
-text-gray-500 hover:text-black 
+text-gray-700 hover:text-black 
 transition-all duration-200 ease-in-out capitalize`;
 
 const isActiveStyle = `flex items-center px-5 gap-3 

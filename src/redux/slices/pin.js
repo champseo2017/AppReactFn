@@ -95,6 +95,28 @@ const pinSlice = createSlice({
         data: [],
       };
     },
+    // createPin
+    createPinLoading: (state, action) => {
+      return {
+        loading: true,
+        error: null,
+        data: [],
+      };
+    },
+    createPinSuccess: (state, action) => {
+      return {
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    },
+    createPinError: (state, action) => {
+      return {
+        loading: false,
+        error: action.payload,
+        data: [],
+      };
+    },
   },
 });
 
@@ -112,6 +134,9 @@ const {
   deletePinLoading,
   deletePinSuccess,
   deletePinError,
+  createPinLoading,
+  createPinSuccess,
+  createPinError,
 } = pinSlice.actions;
 const PinSlices = {
   reducer,
@@ -127,5 +152,8 @@ const PinSlices = {
   deletePinLoading,
   deletePinSuccess,
   deletePinError,
+  createPinLoading,
+  createPinSuccess,
+  createPinError,
 };
 export default PinSlices;

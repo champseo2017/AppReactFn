@@ -20,7 +20,7 @@ module.exports = {
       blackOverlay: "rgba(0, 0, 0, 0.5)",
       shadow2xl: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
 
-      grey: {
+      gray: {
         100: "#f7fafc",
         200: "#edf2f7",
         300: "#e2e8f0",
@@ -132,34 +132,35 @@ module.exports = {
       },
     },
     keyframes: {
-      'slide-in': {
-        '0%': {
-          '-webkit-transform': 'translateX(-200px)',
-          transform: 'translateX(-200px)',
+      "slide-in": {
+        "0%": {
+          "-webkit-transform": "translateX(-200px)",
+          transform: "translateX(-200px)",
         },
-        '100%': {
-          '-webkit-transform': 'translateX(0px)',
-          transform: 'translateX(0px)',
+        "100%": {
+          "-webkit-transform": "translateX(0px)",
+          transform: "translateX(0px)",
         },
       },
 
-      'slide-fwd': {
-        '0%': {
-          '-webkit-transform': 'translateZ(0px)',
-          transform: 'translateZ(0px)',
+      "slide-fwd": {
+        "0%": {
+          "-webkit-transform": "translateZ(0px)",
+          transform: "translateZ(0px)",
         },
-        '100%': {
-          '-webkit-transform': 'translateZ(160px)',
-          transform: 'translateZ(160px)',
+        "100%": {
+          "-webkit-transform": "translateZ(160px)",
+          transform: "translateZ(160px)",
         },
       },
     },
     animation: {
-      'slide-in': 'slide-in 0.5s ease-out',
-      'slide-fwd': ' slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+      "slide-in": "slide-in 0.5s ease-out",
+      "slide-fwd":
+        " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
     },
     transitionProperty: {
-      height: 'height',
+      height: "height",
     },
     spacing: {
       px: "1px",
@@ -185,7 +186,12 @@ module.exports = {
       56: "14rem",
       64: "16rem",
     },
-    backgroundColor: (theme) => theme("colors"),
+    backgroundColor: (color) => ({
+      ...color("colors"),
+      mainColor: "#FBF8F9",
+      secondaryColor: "#F0F0F0",
+      blackOverlay: "rgba(0, 0 ,0 ,0.7)",
+    }),
     backgroundPosition: {
       bottom: "bottom",
       center: "center",
@@ -251,6 +257,7 @@ module.exports = {
       auto: "1 1 auto",
       initial: "0 1 auto",
       none: "none",
+      0.7: "0.7 1 0%",
     },
     flexGrow: {
       0: "0",
@@ -309,6 +316,15 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
+      80: "80px",
+      340: "340px",
+      370: "370px",
+      420: "420px",
+      510: "510px",
+      600: "600px",
+      685: "685px",
+      800: "800px",
+      "90vh": "90vh",
     }),
     inset: {
       0: "0",
@@ -437,6 +453,14 @@ module.exports = {
       "11/12": "91.666667%",
       full: "100%",
       screen: "100vw",
+      190: "190px",
+      275: "275px",
+      300: "300px",
+      340: "340px",
+      350: "350px",
+      656: "656px",
+      880: "880px",
+      508: "508px",
     }),
     zIndex: {
       auto: "auto",

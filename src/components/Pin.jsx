@@ -66,7 +66,10 @@ const Pin = ({ pin }) => {
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
-        onClick={() => navigate(`/pin-detail/${_id}`)}
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/pin-detail/${_id}`);
+        }}
         className="relative w-auto hover:shadow-lg rounded-lg overflow-hidden transition duration-500 ease-in-out"
         style={{
           cursor: "zoom-in",
